@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles({
   loginImg: {
@@ -37,6 +38,9 @@ const LoginPage = () => {
           placeholder="Password"
           helperText="Password must be between 8 and 128 characters"
         />
+        <Button className="submit-button" variant="contained" color="primary">
+          Login
+        </Button>
       </form>
     </>
   );
