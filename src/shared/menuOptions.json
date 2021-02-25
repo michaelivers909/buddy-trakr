@@ -1,0 +1,46 @@
+[
+  {
+    "status": "any",
+    "to": "about",
+    "text": "About",
+    "icon": "info"
+  },
+  {
+    "status": "in",
+    "to": "buddies",
+    "text": "Buddies",
+    "icon": "paw"
+  },
+
+  {
+    "status": "in",
+    "to": "friends",
+    "text": "Friends",
+    "icon": "user-friends"
+  },
+  {
+    "status": "in",
+    "to": "settings",
+    "text": "Settings",
+    "icon": "user-cog"
+  },
+
+  {
+    "status": "out",
+    "to": "login",
+    "text": "Login",
+    "icon": "sign-in-alt"
+  },
+  {
+    "status": "out",
+    "to": "register",
+    "text": "Register",
+    "icon": "user-plus"
+  },
+  {
+    "status": "in",
+    "to": "logout",
+    "text": "Logout",
+    "icon": "sign-out-alt"
+  }
+]

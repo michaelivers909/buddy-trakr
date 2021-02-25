@@ -1,0 +1,27 @@
+.link {
+  padding: 10px;
+  height: 20px;
+}
+
+.link:not(.active):hover {
+  background-color: #d36135;
+}
+
+.active {
+  background-color: #6aa397;
+  color: white;
+}
+
+.text {
+  margin-right: 20px;
+}
+.icon-container {
+  height: 100%;
+  margin-left: 20px;
+}
+
+.icon {
+  display: block;
+  margin: auto;
+  height: 100%;
+}
