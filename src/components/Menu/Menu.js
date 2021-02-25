@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-import "./Menu.css";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -12,8 +11,11 @@ import MenuOptions from "../../shared/menuOptions.json";
 
 const useStyles = makeStyles({
   list: {
-    width: 200,
+    width: 300,
     backgroundColor: "#ddd8c4",
+  },
+  toolbarImg: {
+    maxHeight: 40,
   },
 });
 
@@ -38,6 +40,10 @@ export default function Menu() {
       <React.Fragment>
         <AppBar position="static">
           <Toolbar>
+            <img
+              className={classes.toolbarImg}
+              src="/images/logos/main_logo.png"
+            />
             <IconButton
               onClick={toggleDrawer(true)}
               edge="start"
