@@ -60,3 +60,16 @@ a {
   width: 90%;
   margin: auto;
 }
+
+.MuiButton-root {
+  cursor: pointer;
+}
+.MuiButtonBase-root.Mui-disabled {
+  cursor: not-allowed;
+  pointer-events: auto;
+}
+
+.MuiButton-root.submit-button {
+  display: block;
+  margin: 10px 0px 10px auto;
+}

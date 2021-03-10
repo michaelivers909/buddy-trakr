@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { useValidate } from "../../hooks/useValidate";
 import ValidatedInput from "../../shared/ValidatedInput/ValidatedInput";
 import { useForm } from "../../hooks/useForm";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "../../shared/Alert/Alert";
 
 const useStyles = makeStyles({
   loginImg: {
@@ -15,6 +17,7 @@ const useStyles = makeStyles({
 });
 
 const LoginPage = () => {
+  const [open, setOpen] = useState(false);
   const username = useValidate({
     fieldName: "username",
     startingValue: "",
@@ -32,6 +35,7 @@ const LoginPage = () => {
   });
 
   const loginForm = useForm(() => {
+    setOpen(true);
     console.log(loginForm.value);
   }, [username, password]);
   const classes = useStyles();
@@ -61,11 +65,20 @@ const LoginPage = () => {
           className="submit-button"
           variant="contained"
           color="primary"
+          disabled={!loginForm.valid}
           onClick={() => loginForm.submit()}
         >
           Login
         </Button>
       </form>
+      <Snackbar
+        open={open}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert />
+      </Snackbar>
     </>
   );
 };
