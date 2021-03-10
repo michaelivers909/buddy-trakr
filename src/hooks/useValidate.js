@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 
 export const useValidate = ({
   fieldName,
@@ -11,6 +11,7 @@ export const useValidate = ({
   const [value, set] = useState(startingValue);
   const [error, setError] = useState("");
   const [isTouched, setTouch] = useState(false);
+
   const fieldDisplayName = useMemo(
     () => fieldName[0].toUpperCase() + fieldName.slice(1),
     [fieldName]
@@ -19,9 +20,9 @@ export const useValidate = ({
     return (isTouched && error.length === 0) || !isTouched;
   }, [error, isTouched]);
 
-  function touch() {
+  const touch = useCallback(() => {
     setTouch(true);
-  }
+  }, []);
 
   useEffect(() => {
     if (required && value === "") {
@@ -39,7 +40,7 @@ export const useValidate = ({
     } else if (error !== "") {
       setError("");
     }
-  }, [value]);
+  }, [value, required, minLength, maxLength, email, error, fieldDisplayName]);
 
   function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
