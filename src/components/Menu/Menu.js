@@ -42,6 +42,7 @@ export default function Menu() {
           <Toolbar>
             <img
               className={classes.toolbarImg}
+              alt="Main Logo"
               src="/images/logos/main_logo.png"
             />
             <IconButton

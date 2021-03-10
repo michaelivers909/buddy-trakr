@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import clsx from "clsx";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { useValidate } from "../../hooks/useValidate";
+import ValidatedInput from "../../shared/ValidatedInput/ValidatedInput";
+import { useForm } from "../../hooks/useForm";
 
 const useStyles = makeStyles({
   loginImg: {
@@ -14,31 +15,54 @@ const useStyles = makeStyles({
 });
 
 const LoginPage = () => {
+  const username = useValidate({
+    fieldName: "username",
+    startingValue: "",
+    minLength: 3,
+    maxLength: 16,
+    required: true,
+  });
+
+  const password = useValidate({
+    fieldName: "password",
+    startingValue: "",
+    minLength: 8,
+    maxLength: 128,
+    required: true,
+  });
+
+  const loginForm = useForm(() => {
+    console.log(loginForm.value);
+  }, [username, password]);
   const classes = useStyles();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   return (
     <>
-      <img className={classes.loginImg} src="/images/logos/main_logo.png" />
+      <img
+        className={classes.loginImg}
+        alt="Main Logo"
+        src="/images/logos/main_logo.png"
+      />
       <h5 className="text-center">Your buddies are expecting you!</h5>
       <h3 className="text-center">Please Sign In</h3>
       <form className="generic-form">
-        <TextField
+        <ValidatedInput
           className="generic-input"
-          error
-          label="Username"
+          field={username}
           placeholder="Username"
           helperText="Username must be between 3 and 16 characters"
-        />
-        <TextField
+        />{" "}
+        <ValidatedInput
           className="generic-input"
-          error
-          label="Password"
-          type="password"
+          field={password}
           placeholder="Password"
           helperText="Password must be between 8 and 128 characters"
         />
-        <Button className="submit-button" variant="contained" color="primary">
+        <Button
+          className="submit-button"
+          variant="contained"
+          color="primary"
+          onClick={() => loginForm.submit()}
+        >
           Login
         </Button>
       </form>

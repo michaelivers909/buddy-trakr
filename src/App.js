@@ -2,7 +2,12 @@ import "./App.css";
 import AboutPage from "./components/AboutPage/AboutPage";
 import SettingsPage from "./components/SettingsPage/SettingsPage";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Menu from "./components/Menu/Menu";
 import { useIcons } from "./hooks/useIcons";
 import FriendsPage from "./components/FriendsPage/FriendsPage";
@@ -27,6 +32,9 @@ function App() {
               <Route path="/buddies" component={BuddyPage} />
               <Route path="/register" component={RegisterPage} />
               <Route path="/login" component={LoginPage} />
+              <Route path="*">
+                <Redirect to="/login" />
+              </Route>
             </Switch>
           </div>
         </Router>
