@@ -31,6 +31,7 @@ const LoginPage = () => {
       setAlert({ severity: "error", text: error });
     }
   }, [error]);
+
   const username = useValidate({
     fieldName: "username",
     startingValue: "",

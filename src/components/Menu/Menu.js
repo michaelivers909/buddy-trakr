@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
@@ -20,8 +20,17 @@ const useStyles = makeStyles({
 });
 
 export default function Menu() {
+  const isAuth = useMemo(() => true, []);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const menuDisplay = useMemo(
+    () =>
+      MenuOptions.filter(
+        (v) => true
+        // isAuth ? v.status !== "out" : v.status !== "in"
+      ),
+    [isAuth, MenuOptions]
+  );
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -68,7 +77,7 @@ export default function Menu() {
             onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
           >
-            {MenuOptions.map((opt) => (
+            {menuDisplay.map((opt) => (
               <MenuLink
                 key={opt.to}
                 to={opt.to}
