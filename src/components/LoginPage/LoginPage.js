@@ -74,10 +74,10 @@ const LoginPage = () => {
       <Snackbar
         open={open}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        autoHideDuration={6000}
+        autoHideDuration={10000}
         onClose={() => setOpen(false)}
       >
-        <Alert />
+        <Alert text="THIS IS A TEST" severity="info" />
       </Snackbar>
     </>
   );
