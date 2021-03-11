@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { useValidate } from "../../hooks/useValidate";
@@ -6,6 +6,7 @@ import ValidatedInput from "../../shared/ValidatedInput/ValidatedInput";
 import { useForm } from "../../hooks/useForm";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "../../shared/Alert/Alert";
+import { useAxios } from "../../hooks/useAxios";
 
 const useStyles = makeStyles({
   loginImg: {
@@ -17,7 +18,19 @@ const useStyles = makeStyles({
 });
 
 const LoginPage = () => {
+  const { error, data, apiCall: login } = useAxios(
+    "post",
+    "/users/login",
+    "error"
+  );
+  const [alert, setAlert] = useState({ severity: null, text: null });
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (error) {
+      setOpen(true);
+      setAlert({ severity: "error", text: error });
+    }
+  }, [error]);
   const username = useValidate({
     fieldName: "username",
     startingValue: "",
@@ -35,8 +48,9 @@ const LoginPage = () => {
   });
 
   const loginForm = useForm(() => {
-    setOpen(true);
-    console.log(loginForm.value);
+    if (loginForm.valid) {
+      login({ data: loginForm.value });
+    }
   }, [username, password]);
   const classes = useStyles();
   return (
@@ -58,6 +72,7 @@ const LoginPage = () => {
         <ValidatedInput
           className="generic-input"
           field={password}
+          type="password"
           placeholder="Password"
           helperText="Password must be between 8 and 128 characters"
         />
@@ -77,7 +92,7 @@ const LoginPage = () => {
         autoHideDuration={10000}
         onClose={() => setOpen(false)}
       >
-        <Alert text="THIS IS A TEST" severity="info" />
+        <Alert text={alert.text} severity={alert.severity} />
       </Snackbar>
     </>
   );

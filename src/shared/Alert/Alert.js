@@ -7,7 +7,6 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import InfoIcon from "@material-ui/icons/Info";
 
 const useStyles = makeStyles(({ palette }) => {
-  console.log(palette);
   let { error, secondary, primary, warning } = palette;
   return {
     alert: {
@@ -54,6 +53,8 @@ function Alert({ severity, text }) {
         return <CheckCircleOutlineIcon />;
       case "warning":
         return <WarningIcon />;
+      default:
+        return <ErrorOutlineIcon />;
     }
   }
   const classes = useStyles();

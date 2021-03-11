@@ -10,6 +10,7 @@ const ValidatedInput = (props) => {
       label={props.field.fieldDisplayName}
       placeholder={props.placeholder}
       value={props.field.value}
+      type={props.type || "text"}
       onChange={(e) => props.field.set(e.target.value)}
       onBlur={(e) => {
         if (!props.field.isTouched) {

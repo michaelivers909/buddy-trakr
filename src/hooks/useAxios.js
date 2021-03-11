@@ -6,7 +6,7 @@ import axios from "axios";
  * @param {String} errorKey Key where any potential errors might be returned from the server
  * @returns
  */
-export const useAxios = (errorKey = null) => {
+export const useAxios = (method, url, errorKey = null) => {
   const isMountedRef = useRef(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -17,18 +17,13 @@ export const useAxios = (errorKey = null) => {
       isMountedRef.current = false;
     };
   }, []);
-  /**
-   *
-   * @param {String} url Url of the request
-   * @param {String} type Type of HTTP Request to make
-   * @param {object} [config] Configuration for the request as per the Axios Docs
-   */
 
-  async function apiCall(url, type, config) {
+  async function apiCall(config) {
     try {
+      setError(null);
       setLoading(true);
-      const res = axios({ url, type, ...config });
-
+      const res = await axios({ url, method, ...config });
+      console.log(res);
       if (!isMountedRef.current) {
         return;
       }
