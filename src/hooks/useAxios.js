@@ -23,7 +23,6 @@ export const useAxios = (method, url, errorKey = null) => {
       setError(null);
       setLoading(true);
       const res = await axios({ url, method, ...config });
-      console.log(res);
       if (!isMountedRef.current) {
         return;
       }
